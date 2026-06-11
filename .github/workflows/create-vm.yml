@@ -33,7 +33,7 @@ jobs:
       - name: Debug OCI Config
         run: |
           echo "=== OCI Config ==="
-          cat ~/.oci/config
+          # cat ~/.oci/config
           echo ""
           echo "=== PEM Line Count ==="
           wc -l ~/.oci/oci_api_key.pem
