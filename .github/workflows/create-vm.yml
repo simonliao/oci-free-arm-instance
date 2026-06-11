@@ -30,18 +30,6 @@ jobs:
       - name: Add OCI CLI to path
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Debug OCI Config
-        run: |
-          echo "=== OCI Config ==="
-          # cat ~/.oci/config
-          echo ""
-          echo "=== PEM Line Count ==="
-          wc -l ~/.oci/oci_api_key.pem
-          echo "=== PEM First Line ==="
-          head -1 ~/.oci/oci_api_key.pem
-          echo "=== PEM Last Line ==="
-          tail -1 ~/.oci/oci_api_key.pem
-
       - name: Setup OCI CLI and Try to Create VM
         id: create_vm
         # This forces the job to succeed so the cache will save.
@@ -90,6 +78,18 @@ jobs:
             echo "Error: Success string not found in OCI output. Failing the step."
             exit 1
           fi
+
+      - name: Debug OCI Config
+        run: |
+          echo "=== OCI Config ==="
+          # cat ~/.oci/config
+          echo ""
+          echo "=== PEM Line Count ==="
+          wc -l ~/.oci/oci_api_key.pem
+          echo "=== PEM First Line ==="
+          head -1 ~/.oci/oci_api_key.pem
+          echo "=== PEM Last Line ==="
+          tail -1 ~/.oci/oci_api_key.pem
 
       - name: Send Discord Notification
         if: always()
